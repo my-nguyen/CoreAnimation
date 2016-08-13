@@ -41,9 +41,31 @@ class ViewController: UIViewController {
         let animations = { [unowned self] in
             switch self.currentAnimation {
             case 0:
-                // make the view twice its normal width and height
+                // make the image twice its normal width and height
                 self.imageView.transform = CGAffineTransformMakeScale(2, 2)
-                break
+            case 1:
+                // reset the image to its default size
+                self.imageView.transform = CGAffineTransformIdentity
+            case 2:
+                // move the image by a certain distance
+                self.imageView.transform = CGAffineTransformMakeTranslation(-256, -256)
+            case 3:
+                // reset the image to its default position
+                self.imageView.transform = CGAffineTransformIdentity
+            case 4:
+                // rotate the image 90 degrees clockwise
+                self.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+            case 5:
+                // reset the image to 0 degree
+                self.imageView.transform = CGAffineTransformIdentity
+            case 6:
+                // turn the image to almost invisible and the background to green
+                self.imageView.alpha = 0.1
+                self.imageView.backgroundColor = UIColor.greenColor()
+            case 7:
+                // reset the image transparency and its background color
+                self.imageView.alpha = 1
+                self.imageView.backgroundColor = UIColor.clearColor()
             default:
                 break
             }
@@ -52,8 +74,10 @@ class ViewController: UIViewController {
             // unhide the tap button
             self.tap.hidden = false
         }
-        // duration of 1 second, no delay, no options
-        UIView.animateWithDuration(1, delay: 0, options: [], animations: animations, completion: completion)
+        // animate for 1 second with no delay and no options using the default ease-in-ease-out animation
+        // UIView.animateWithDuration(1, delay: 0, options: [], animations: animations, completion: completion)
+        // animate using spring animation
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: animations, completion: completion)
 
         // cycle through animations each time the button is tapped
         currentAnimation += 1
