@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         let animations = { [unowned self] in
             switch self.currentAnimation {
             case 0:
+                // make the view twice its normal width and height
+                self.imageView.transform = CGAffineTransformMakeScale(2, 2)
                 break
             default:
                 break
